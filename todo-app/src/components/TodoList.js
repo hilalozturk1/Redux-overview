@@ -6,20 +6,15 @@ function TodoList() {
   console.log(items);
   return (
     <ul className="todo-list">
-      <li className="completed">
-        <div className="view">
-          <input className="toggle" type="checkbox" />
-          <label>Learnjs</label>
-          <button className="destroy"></button>
-        </div>
-      </li>
-      <li className="completed">
-        <div className="view">
-          <input type="checkbox" className="toggle" />
-          <label>Learncss</label>
-          <button className="destroy"></button>
-        </div>
-      </li>
+      {items.map((item, idx) => (
+        <li className={item.completed ? "completed" : ""} key={idx}>
+          <div className="view">
+            <input className="toggle" type="checkbox" />
+            <label>{item.title}</label>
+            <button className="destroy"></button>
+          </div>
+        </li>
+      ))}
     </ul>
   );
 }

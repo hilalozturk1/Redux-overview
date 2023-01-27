@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle, removeItem } from "../redux/todos/todosSlice";
 
+let filtered = [];
 function TodoList() {
   const dispatch = useDispatch();
 
@@ -11,10 +12,20 @@ function TodoList() {
       dispatch(removeItem({ id: itemId }));
     }
   };
+
+  const activeFilter = useSelector((state) => state.todos.activeFilter);
+
+  filtered = items;
+  if (activeFilter !== "all") {
+    filtered = items.filter((todo) =>
+      activeFilter === "active" ? todo.completed === false : todo.completed === true
+    );
+  }
+
   console.log(items);
   return (
     <ul className="todo-list">
-      {items.map((item, idx) => (
+      {filtered.map((item, idx) => (
         <li className={item.completed ? "completed" : ""} key={idx}>
           <div className="view">
             <input

@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 function TodoList() {
+  const items = useSelector((state) => state.todos.items);
+  console.log(items);
   return (
     <ul className="todo-list">
       <li className="completed">

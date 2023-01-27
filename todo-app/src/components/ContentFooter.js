@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 function ContentFooter() {
+  const items = useSelector((state) => state.todos.items);
   return (
     <footer className="footer">
       <span className="todo-count">
-        <strong>2</strong> items left
+        <strong>{items.length}</strong> items left
       </span>
 
       <ul className="filters">

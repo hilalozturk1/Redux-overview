@@ -11,10 +11,15 @@ function TodoList() {
     }
   };
   const filtered = useSelector(selectFilteredTodos);
-  
+  const isLoading = useSelector((state) => state.todos.isLoading);
+
   useEffect(() => {
     dispatch(getTodosAsync());
   }, [dispatch]);
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
 
   return (
     <ul className="todo-list">

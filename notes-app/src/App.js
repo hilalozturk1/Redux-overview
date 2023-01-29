@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Box from "./components/Box";
+import NoteBox from "./components/NoteBox";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>NotesApp</h2>
+      <input type="text" placeholder="Search.." />
+      <Box />
+      <br />
+      <div className="container">
+        <NoteBox /><NoteBox /><NoteBox /><NoteBox /><NoteBox /><NoteBox />  
+      </div>
     </div>
   );
 }

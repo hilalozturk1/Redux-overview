@@ -19,6 +19,29 @@ export const addTodoAsync = createAsyncThunk("todos/addTodoAsync", async (data) 
   return await res.json();
 });
 
+export const toggleTodoAsync = createAsyncThunk("todos/toggleTodoAsync", async (data) => {
+  //todoId
+  console.log(data);
+  const res = await fetch(`${process.env.REACT_APP_API_BASE_ENDPOINT}/todos/${data.id}`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      completed: data.completed,
+    }),
+  });
+  return await res.json();
+});
+
+export const removeTodoAsycn = createAsyncThunk("todos/removeTodoAsycn", async (id) => {
+  await fetch(`${process.env.REACT_APP_API_BASE_ENDPOINT}/todos/${id}`, {
+    method: "DELETE",
+  });
+  return id;
+});
+
 export const todosSlice = createSlice({
   name: "todos",
   initialState: {
@@ -89,6 +112,19 @@ export const todosSlice = createSlice({
     [addTodoAsync.rejected]: (state, action) => {
       state.addNewTodoLoading = false;
       state.addNewTodoError = action.error.message;
+    },
+    //toggle todo
+    [toggleTodoAsync.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      const { id, completed } = action.payload;
+      const index = state.items.findIndex((item) => item.id === id);
+      state.items[index].completed = completed;
+    },
+    //remove todo
+    [removeTodoAsycn.fulfilled]: (state, action) => {
+      const id = action.payload;
+      const filteredList = state.items.filter((item) => item.id !== id);
+      state.items = filteredList;
     },
   },
 });

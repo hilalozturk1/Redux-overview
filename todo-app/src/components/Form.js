@@ -1,25 +1,32 @@
 import React, { useState } from "react";
-import { addTodo } from "../redux/todos/todosSlice";
-import { useDispatch } from "react-redux";
+import { addTodo, addTodoAsync } from "../redux/todos/todosSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Form() {
   const [title, setTitle] = useState("");
+  const isLoading = useSelector((state) => state.todos.addNewTodoLoading);
+  const error = useSelector((state) => state.todos.addNewTodoError);
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     if (!title) {
       return;
     }
     e.preventDefault();
 
-    dispatch(addTodo({ title }));
+    await dispatch(addTodoAsync({ title }));
 
     setTitle("");
   };
 
+  if (error) {
+    alert(error);
+    return;
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ display: "flex", alignItems: "center" }}>
       <input
         className="new-todo"
         placeholder="What needs to be done?"
@@ -28,7 +35,9 @@ function Form() {
         }}
         value={title}
         autoFocus
+        disabled={isLoading}
       />
+      {isLoading && <span style={{ paddingRight: 10 }}>Loading..</span>}
     </form>
   );
 }

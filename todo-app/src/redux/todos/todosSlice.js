@@ -1,7 +1,21 @@
 import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getTodosAsync = createAsyncThunk("todos/getTodosAsync", async () => {
-  const res = await fetch("http://localhost:7000/todos");
+  const res = await fetch(`${process.env.REACT_APP_API_BASE_ENDPOINT}/todos`);
+  return await res.json();
+});
+
+export const addTodoAsync = createAsyncThunk("todos/addTodoAsync", async (data) => {
+  console.log(data.title);
+  const res = await fetch(`${process.env.REACT_APP_API_BASE_ENDPOINT}/todos`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: data.title,
+    }),
+  });
   return await res.json();
 });
 
@@ -10,7 +24,9 @@ export const todosSlice = createSlice({
   initialState: {
     items: [],
     isLoading: false,
+    addNewTodoLoading: false,
     error: null,
+    addNewTodoError: null,
     activeFilter: "all",
   },
   reducers: {
@@ -47,19 +63,32 @@ export const todosSlice = createSlice({
     },
   },
   extraReducers: {
+    // get todos
     [getTodosAsync.pending]: (state, action) => {
       //pending
       state.isLoading = true;
     },
     [getTodosAsync.fulfilled]: (state, action) => {
       //success
-      state.items = action.payload;//pass
+      state.items = action.payload; //pass
       state.isLoading = false;
     },
     [getTodosAsync.rejected]: (state, action) => {
       //error
       state.isLoading = false;
       state.error = action.error.message;
+    },
+    // add todo
+    [addTodoAsync.pending]: (state, action) => {
+      state.addNewTodoLoading = true;
+    },
+    [addTodoAsync.fulfilled]: (state, action) => {
+      state.items.push(action.payload);
+      state.addNewTodoLoading = false;
+    },
+    [addTodoAsync.rejected]: (state, action) => {
+      state.addNewTodoLoading = false;
+      state.addNewTodoError = action.error.message;
     },
   },
 });

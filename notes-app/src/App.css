@@ -39,6 +39,9 @@ input[type=text] {
   float: left;
   margin: 5px
 }
+.active {
+  opacity: 0.5;
+}
 .button {
   background-color: greenyellow;
   width: 130px;
@@ -50,7 +53,6 @@ input[type=text] {
   border: 1px solid green;
   height: auto;
   margin: auto;
-  background-color: plum;
   padding: 30px;
 }
 .container {

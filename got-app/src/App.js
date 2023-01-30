@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Detail from "./pages/Detail";
 
 function App() {
   return (
@@ -23,22 +24,12 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Routes>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/users" element={<Users />}></Route>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/detail/:id" element={<Detail />}></Route>
         </Routes>
       </div>
     </Router>
   );
-}
-
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
 
 export default App;

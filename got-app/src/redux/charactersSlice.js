@@ -1,0 +1,23 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const fetchCharacters = createAsyncThunk("characters/fetchCharacters", async () => {
+  const res = await axios(`${process.env.REACT_APP_API_BASE_ENDPOINT}?limit=7&offset=24`);
+  return res.data;
+});
+
+export const charactersSlice = createSlice({
+  name: "characters",
+  initialState: {
+    items: [],
+  },
+  reducers: {},
+  extraReducers: {
+    [fetchCharacters.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.items = action.payload;
+    },
+  },
+});
+
+export default charactersSlice.reducer;

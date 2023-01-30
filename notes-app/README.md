@@ -1,4 +1,4 @@
-# [notes-app-redux-hilal.netlify.app](notes-app-redux-hilal.netlify.app)
+# [notes-app-redux-hilal.netlify.app](https://notes-app-redux-hilal.netlify.app/)
 
 # Getting Started with Create React App
 

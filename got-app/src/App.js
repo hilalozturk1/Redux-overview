@@ -1,5 +1,6 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -31,9 +32,6 @@ function App() {
   );
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
 
 function About() {
   return <h2>About</h2>;

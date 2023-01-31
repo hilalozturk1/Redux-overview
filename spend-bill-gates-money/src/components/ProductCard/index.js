@@ -29,7 +29,7 @@ function ProductCard({ item }) {
     } else {
       setDisabledSell(budget < item.productPrice);
     }
-  }, [budget]);
+  }, [budget, item.productPrice]);
 
   const buy = () => {
     setCount(Number(count) + 1);

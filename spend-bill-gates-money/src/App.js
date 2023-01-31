@@ -1,22 +1,18 @@
 import "./App.css";
 import Header from "./components/Header";
-import ProductCard from "./components/ProductCard";
+import ProductCardContainer from "./components/ProductCardContainer";
 import Receipt from "./components/Receipt";
+import { useSelector } from "react-redux";
 
 function App() {
-  const item = {
-    image: "https://fujifilm-x.com/wp-content/uploads/2021/01/gfx100s_sample_04_thum-1.jpg",
-    productName: "ds",
-    productPrice: 3232,
-  };
+  const items = useSelector((state) => state.products.items);
 
   return (
     <div className="App">
       <Header />
-      <ProductCard item={item} />
-      <ProductCard item={item} />
-      <ProductCard item={item} />
-      <Receipt item={item} />
+      <div>
+        <ProductCardContainer />
+      </div>
     </div>
   );
 }

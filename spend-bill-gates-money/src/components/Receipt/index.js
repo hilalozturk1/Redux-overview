@@ -1,42 +1,55 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import styles from "./Receipt.module.css";
+import { useSelector } from "react-redux";
 
-function Receipt({item}) {
+function Receipt() {
+  const items = useSelector((state) => state.products.items);
 
+  const filtered = items.filter((item) => item.count > 0);
+
+  let spentMoney = 0;
+  filtered.map((item) => (spentMoney += item.productPrice * item.count));
+
+  if (filtered.length === 0) {
+    return null;
+  }
 
   return (
     <div>
-      <Container>
+      <Container style={{ display: "inline-block" }}>
         <Row>
           <Col xs={4}></Col>
 
           <Col className={styles.receiptBorder}>
             <Row>
               <h1>Your Receipt</h1>
-              {
-                <div key={item.id}>
-                  <div className={styles.receiptLine}>
-                    <Col sm={1}></Col>
-                    <Col sm={4}>
-                      <span>{item.productName}</span>
-                    </Col>
-                    <Col sm={4}>
-                      <span style={{ textAlign: "center" }}>x{item.count}</span>
-                    </Col>
-                    <Col sm={4}>
-                      {" "}
-                      <span className={styles.receiptPrice}>${item.productPrice * item.count}</span>
-                    </Col>
-                    <Col sm={1}></Col>
+              {filtered &&
+                filtered.map((item) => (
+                  <div key={item.id}>
+                    <div className={styles.receiptLine}>
+                      <Col sm={1}></Col>
+                      <Col sm={4}>
+                        <span>{item.productName}</span>
+                      </Col>
+                      <Col sm={4}>
+                        <span style={{ textAlign: "center" }}>x{item.count}</span>
+                      </Col>
+                      <Col sm={4}>
+                        {" "}
+                        <span className={styles.receiptPrice}>
+                          ${item.productPrice * item.count}
+                        </span>
+                      </Col>
+                      <Col sm={1}></Col>
+                    </div>
                   </div>
-                </div>
-              }
+                ))}
               <div className={styles.totalName}>
                 <Col sm={1}></Col>
                 <Col>
                   <span>Total</span>
-                  <span className={styles.totalPrice}>${21}</span>
+                  <span className={styles.totalPrice}>${spentMoney}</span>
                 </Col>
                 <Col sm={1}></Col>
               </div>

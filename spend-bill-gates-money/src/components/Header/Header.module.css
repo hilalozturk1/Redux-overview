@@ -1,0 +1,23 @@
+.header {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    min-width: 250px;
+    text-align: center;
+  }
+  .container {
+    background-color: #2ecc71;
+      background: linear-gradient(180deg,#2ecc71,#1abc9c);
+      color: #fff;
+      font-family: Roboto,sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      left: 10px;
+      margin: 10px 83px 1.5rem 87px;
+      padding: 20px;
+      position: -webkit-sticky;
+      position: sticky;
+      text-align: center;
+      top: 0;
+      z-index: 1;
+  }

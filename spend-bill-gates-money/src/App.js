@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import ProductCard from "./components/ProductCard";
+import Receipt from "./components/Receipt";
 
 function App() {
+  const item = {
+    image: "https://fujifilm-x.com/wp-content/uploads/2021/01/gfx100s_sample_04_thum-1.jpg",
+    productName: "ds",
+    productPrice: 3232,
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <ProductCard item={item} />
+      <ProductCard item={item} />
+      <ProductCard item={item} />
+      <Receipt item={item} />
     </div>
   );
 }

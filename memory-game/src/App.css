@@ -1,5 +1,15 @@
 .App {
-  text-align: center;
+  padding:35px;
+  width:40%;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+.playground {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  perspective: 1000px;
+  margin-bottom: -15px;
 }
 
 .App-logo {
